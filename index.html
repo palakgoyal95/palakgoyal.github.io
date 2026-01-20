@@ -5,114 +5,134 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Palak Goyal | Web3 Portfolio</title>
 
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Enable Dark Mode -->
+  <!-- Tailwind Config -->
   <script>
     tailwind.config = {
       darkMode: 'class',
+      theme: {
+        extend: {
+          animation: {
+            fade: 'fadeIn 1.5s ease-in-out',
+            slide: 'slideUp 1.2s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(40px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+          },
+        },
+      },
     }
   </script>
 
-  <!-- Web3 Library -->
+  <!-- Web3 -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.min.js"></script>
 </head>
 
 <body class="bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-100 transition-all duration-300">
 
-  <!-- NAVBAR -->
-  <nav class="flex justify-between items-center px-6 py-4 bg-white dark:bg-slate-800 shadow">
-    <h1 class="text-xl font-bold">Palak Goyal</h1>
+<!-- NAVBAR -->
+<nav class="fixed w-full z-50 flex justify-between items-center px-6 py-4 bg-white/70 dark:bg-slate-800/70 backdrop-blur shadow">
+  <h1 class="text-xl font-bold">Palak Goyal</h1>
 
-    <div class="flex gap-3">
-      <!-- Dark Mode Toggle -->
-      <button onclick="toggleDarkMode()"
-        class="px-3 py-2 rounded bg-gray-200 dark:bg-slate-700">
-        🌙
-      </button>
+  <div class="flex gap-3">
+    <button onclick="toggleDarkMode()"
+      class="px-3 py-2 rounded bg-gray-200 dark:bg-slate-700 hover:scale-105 transition">
+      🌙
+    </button>
 
-      <!-- Wallet Button -->
-      <button id="connectBtn"
-        class="px-4 py-2 rounded bg-green-500 text-white font-semibold hover:bg-green-600">
-        Connect Wallet
-      </button>
-    </div>
-  </nav>
+    <button id="connectBtn"
+      class="px-4 py-2 rounded bg-green-500 text-white font-semibold hover:bg-green-600 hover:scale-105 transition">
+      Connect Wallet
+    </button>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="text-center py-24 px-6">
-    <h2 class="text-4xl font-extrabold mb-4">
-      Hi, I'm <span class="text-green-500">Palak</span> 👋
+<!-- HERO WITH VIDEO -->
+<section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop playsinline
+    class="absolute w-full h-full object-cover">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+
+  <!-- OVERLAY -->
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <!-- CONTENT -->
+  <div class="relative z-10 px-6 animate-fade">
+    <h2 class="text-5xl font-extrabold mb-4">
+      Hi, I'm <span class="text-green-400">Palak</span> 👋
     </h2>
-    <p class="text-xl text-gray-600 dark:text-gray-400">
-      Web Developer | Web3 Enthusiast
+    <p class="text-xl text-gray-300 animate-slide">
+      Web Developer • Web3 Enthusiast
     </p>
-    <p class="mt-4 max-w-xl mx-auto text-gray-500 dark:text-gray-400">
-      I build modern, decentralized and secure web applications using Web3 technologies.
+    <p class="mt-6 max-w-xl mx-auto text-gray-400">
+      Crafting decentralized, modern & secure web experiences
     </p>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section class="max-w-5xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold mb-6">About Me</h3>
-    <p class="text-gray-600 dark:text-gray-400">
-      I am a passionate developer exploring Web3, Blockchain, and Smart Contracts.
-      I love building clean UI with Tailwind CSS and integrating decentralized features
-      like wallet authentication and smart contracts.
-    </p>
-  </section>
+<!-- ABOUT -->
+<section class="max-w-5xl mx-auto px-6 py-20 animate-slide">
+  <h3 class="text-3xl font-bold mb-6">About Me</h3>
+  <p class="text-gray-600 dark:text-gray-400">
+    I am a passionate Web Developer exploring Web3, Blockchain,
+    and Smart Contracts. I love Tailwind CSS, clean UI, and
+    building decentralized applications.
+  </p>
+</section>
 
-  <!-- SKILLS -->
-  <section class="max-w-5xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold mb-6">Skills</h3>
+<!-- SKILLS -->
+<section class="max-w-5xl mx-auto px-6 py-20">
+  <h3 class="text-3xl font-bold mb-6">Skills</h3>
+  <div class="flex flex-wrap gap-3">
+    <span class="skill">HTML</span>
+    <span class="skill">JavaScript</span>
+    <span class="skill">Tailwind CSS</span>
+    <span class="skill">Web3</span>
+    <span class="skill">Blockchain</span>
+    <span class="skill">MetaMask</span>
+  </div>
+</section>
 
-    <div class="flex flex-wrap gap-3">
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">HTML</span>
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">CSS</span>
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">JavaScript</span>
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">Tailwind CSS</span>
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">Web3</span>
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">Blockchain</span>
-      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">MetaMask</span>
-    </div>
-  </section>
+<!-- PROJECTS -->
+<section class="max-w-5xl mx-auto px-6 py-20">
+  <h3 class="text-3xl font-bold mb-10">Web3 Projects</h3>
 
-  <!-- PROJECTS -->
-  <section class="max-w-5xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold mb-8">Web3 Projects</h3>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="card">🔐 Wallet Connect DApp</div>
+    <div class="card">🗳️ Voting Smart Contract</div>
+    <div class="card">🖼️ NFT Minting Platform</div>
+  </div>
+</section>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow">
-        <h4 class="font-bold text-lg mb-2">🔐 Wallet Connect App</h4>
-        <p class="text-gray-600 dark:text-gray-400">
-          Connect MetaMask wallet using Web3 and ethers.js
-        </p>
-      </div>
+<!-- FOOTER -->
+<footer class="text-center py-6 bg-white dark:bg-slate-800">
+  <p class="text-gray-500 dark:text-gray-400">
+    © 2026 Palak Goyal • Built with Tailwind & Web3
+  </p>
+</footer>
 
-      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow">
-        <h4 class="font-bold text-lg mb-2">🗳️ Voting DApp</h4>
-        <p class="text-gray-600 dark:text-gray-400">
-          Decentralized voting using smart contracts
-        </p>
-      </div>
+<!-- UTIL CLASSES -->
+<style>
+  .skill {
+    @apply px-4 py-2 rounded bg-slate-200 dark:bg-slate-700 hover:scale-105 transition;
+  }
+  .card {
+    @apply p-6 rounded-xl bg-white dark:bg-slate-800 shadow hover:scale-105 transition;
+  }
+</style>
 
-      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow">
-        <h4 class="font-bold text-lg mb-2">🖼️ NFT Mint App</h4>
-        <p class="text-gray-600 dark:text-gray-400">
-          Mint NFTs directly from a Web3-enabled website
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="text-center py-6 bg-white dark:bg-slate-800">
-    <p class="text-gray-500 dark:text-gray-400">
-      © 2026 Palak Goyal · Built with Tailwind & Web3
-    </p>
-  </footer>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
