@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="dark">
 <head>
-  <title>My Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palak Goyal | Web3 Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Enable Dark Mode -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+  <!-- Web3 Library -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.min.js"></script>
 </head>
-<body>
-  <h1>Hello, my portfolio is live 🚀</h1>
-  <p>Made by Palak Goyal</p>
+
+<body class="bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-100 transition-all duration-300">
+
+  <!-- NAVBAR -->
+  <nav class="flex justify-between items-center px-6 py-4 bg-white dark:bg-slate-800 shadow">
+    <h1 class="text-xl font-bold">Palak Goyal</h1>
+
+    <div class="flex gap-3">
+      <!-- Dark Mode Toggle -->
+      <button onclick="toggleDarkMode()"
+        class="px-3 py-2 rounded bg-gray-200 dark:bg-slate-700">
+        🌙
+      </button>
+
+      <!-- Wallet Button -->
+      <button id="connectBtn"
+        class="px-4 py-2 rounded bg-green-500 text-white font-semibold hover:bg-green-600">
+        Connect Wallet
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="text-center py-24 px-6">
+    <h2 class="text-4xl font-extrabold mb-4">
+      Hi, I'm <span class="text-green-500">Palak</span> 👋
+    </h2>
+    <p class="text-xl text-gray-600 dark:text-gray-400">
+      Web Developer | Web3 Enthusiast
+    </p>
+    <p class="mt-4 max-w-xl mx-auto text-gray-500 dark:text-gray-400">
+      I build modern, decentralized and secure web applications using Web3 technologies.
+    </p>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <h3 class="text-3xl font-bold mb-6">About Me</h3>
+    <p class="text-gray-600 dark:text-gray-400">
+      I am a passionate developer exploring Web3, Blockchain, and Smart Contracts.
+      I love building clean UI with Tailwind CSS and integrating decentralized features
+      like wallet authentication and smart contracts.
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <h3 class="text-3xl font-bold mb-6">Skills</h3>
+
+    <div class="flex flex-wrap gap-3">
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">HTML</span>
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">CSS</span>
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">JavaScript</span>
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">Tailwind CSS</span>
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">Web3</span>
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">Blockchain</span>
+      <span class="px-4 py-2 rounded bg-slate-200 dark:bg-slate-700">MetaMask</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <h3 class="text-3xl font-bold mb-8">Web3 Projects</h3>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow">
+        <h4 class="font-bold text-lg mb-2">🔐 Wallet Connect App</h4>
+        <p class="text-gray-600 dark:text-gray-400">
+          Connect MetaMask wallet using Web3 and ethers.js
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow">
+        <h4 class="font-bold text-lg mb-2">🗳️ Voting DApp</h4>
+        <p class="text-gray-600 dark:text-gray-400">
+          Decentralized voting using smart contracts
+        </p>
+      </div>
+
+      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 shadow">
+        <h4 class="font-bold text-lg mb-2">🖼️ NFT Mint App</h4>
+        <p class="text-gray-600 dark:text-gray-400">
+          Mint NFTs directly from a Web3-enabled website
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-6 bg-white dark:bg-slate-800">
+    <p class="text-gray-500 dark:text-gray-400">
+      © 2026 Palak Goyal · Built with Tailwind & Web3
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
