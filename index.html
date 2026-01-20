@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Palak Goyal | Web3 Portfolio</title>
+  <title>Palak Goyal | Portfolio</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,43 +11,9 @@
   <!-- Tailwind Config -->
   <script>
     tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          animation: {
-            fade: 'fadeIn 1.5s ease-in-out',
-            slide: 'slideUp 1.2s ease-out',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(40px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            },
-          },
-        },
-      },
+      darkMode: 'class'
     }
   </script>
-  <style>
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.animate-gradient {
-  background-size: 300% 300%;
-  animation: gradient 12s ease infinite;
-}
-</style>
-
-
-  <!-- Web3 -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.min.js"></script>
 </head>
 
 <body class="bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-100 transition-all duration-300">
@@ -61,107 +27,103 @@
       class="px-3 py-2 rounded bg-gray-200 dark:bg-slate-700 hover:scale-105 transition">
       🌙
     </button>
-
-    <button id="connectBtn"
-      class="px-4 py-2 rounded bg-green-500 text-white font-semibold hover:bg-green-600 hover:scale-105 transition">
-      Connect Wallet
-    </button>
   </div>
 </nav>
 
-<!-- HERO WITH VIDEO -->
-<!-- HERO : ANIMATED GRADIENT -->
-<section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+<!-- HERO -->
+<section class="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-  <!-- Animated Gradient Background -->
-  <div class="absolute inset-0 bg-gradient-to-br
-              from-green-400 via-emerald-500 to-teal-600
-              dark:from-indigo-600 dark:via-purple-700 dark:to-pink-600
-              animate-gradient">
-  </div>
+  <!-- Gradient Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600
+              dark:from-indigo-600 dark:via-purple-700 dark:to-pink-600 animate-gradient"></div>
 
-  <!-- Overlay -->
   <div class="absolute inset-0 bg-black/40"></div>
 
-  <!-- Content -->
-  <div class="relative z-10 px-6 animate-fade">
+  <div class="relative z-10 px-6">
     <h2 class="text-5xl md:text-6xl font-extrabold mb-4 text-white">
-      Hi, I'm <span class="text-green-200">Palak</span> 👋
+      Hi, I'm <span class="text-yellow-300">Palak</span> 👋
     </h2>
-
-    <p class="text-xl md:text-2xl text-gray-200 animate-slide">
-      Web Developer • Web3 Enthusiast
+    <p class="text-xl md:text-2xl text-gray-200">
+      Web Developer | Python | Web3
     </p>
 
-    <p class="mt-6 max-w-xl mx-auto text-gray-200">
-      Building modern, decentralized and secure web experiences
-    </p>
-
-    <div class="mt-8 flex justify-center gap-4">
-      <a href="#projects"
-         class="px-6 py-3 rounded-lg bg-white text-black font-semibold hover:scale-105 transition">
-        View Projects
-      </a>
-
-      <a href="#contact"
-         class="px-6 py-3 rounded-lg border border-white text-white hover:bg-white hover:text-black transition">
-        Contact Me
-      </a>
-    </div>
+    <a href="#projects"
+       class="inline-block mt-8 px-6 py-3 rounded-lg bg-white text-black font-semibold hover:scale-105 transition">
+      View My Work
+    </a>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="max-w-5xl mx-auto px-6 py-20 animate-slide">
+<section class="max-w-5xl mx-auto px-6 py-20">
   <h3 class="text-3xl font-bold mb-6">About Me</h3>
   <p class="text-gray-600 dark:text-gray-400">
-    I am a passionate Web Developer exploring Web3, Blockchain,
-    and Smart Contracts. I love Tailwind CSS, clean UI, and
-    building decentralized applications.
+    I am a passionate developer who loves building clean, responsive,
+    and modern websites using Tailwind CSS and JavaScript.
+    I enjoy learning new technologies and creating real-world projects.
   </p>
 </section>
 
 <!-- SKILLS -->
 <section class="max-w-5xl mx-auto px-6 py-20">
   <h3 class="text-3xl font-bold mb-6">Skills</h3>
+
   <div class="flex flex-wrap gap-3">
     <span class="skill">HTML</span>
+    <span class="skill">CSS</span>
     <span class="skill">JavaScript</span>
     <span class="skill">Tailwind CSS</span>
-    <span class="skill">Web3</span>
-    <span class="skill">Blockchain</span>
-    <span class="skill">MetaMask</span>
+    <span class="skill">Python</span>
+    <span class="skill">Django</span>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="max-w-5xl mx-auto px-6 py-20">
-  <h3 class="text-3xl font-bold mb-10">Web3 Projects</h3>
+<!-- PROJECTS (Dynamic) -->
+<section id="projects" class="max-w-5xl mx-auto px-6 py-20">
+  <h3 class="text-3xl font-bold mb-10">Projects</h3>
 
-  <div class="grid md:grid-cols-3 gap-6">
-    <div class="card">🔐 Wallet Connect DApp</div>
-    <div class="card">🗳️ Voting Smart Contract</div>
-    <div class="card">🖼️ NFT Minting Platform</div>
+  <div id="projectList" class="grid md:grid-cols-3 gap-6">
+    <!-- JS will load projects here -->
   </div>
+</section>
+
+<!-- CONTACT -->
+<section class="max-w-5xl mx-auto px-6 py-20">
+  <h3 class="text-3xl font-bold mb-6">Contact</h3>
+  <p class="text-gray-600 dark:text-gray-400">
+    📧 Email: palak@example.com <br>
+    💼 GitHub: github.com/palakgoyal
+  </p>
 </section>
 
 <!-- FOOTER -->
 <footer class="text-center py-6 bg-white dark:bg-slate-800">
   <p class="text-gray-500 dark:text-gray-400">
-    © 2026 Palak Goyal • Built with Tailwind & Web3
+    © 2026 Palak Goyal • Built with Tailwind CSS
   </p>
 </footer>
 
-<!-- UTIL CLASSES -->
+<!-- Utility Styles -->
 <style>
-  .skill {
-    @apply px-4 py-2 rounded bg-slate-200 dark:bg-slate-700 hover:scale-105 transition;
-  }
-  .card {
-    @apply p-6 rounded-xl bg-white dark:bg-slate-800 shadow hover:scale-105 transition;
-  }
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  background-size: 300% 300%;
+  animation: gradient 12s ease infinite;
+}
+.skill {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: #e2e8f0;
+}
+.dark .skill {
+  background: #334155;
+}
 </style>
 
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
