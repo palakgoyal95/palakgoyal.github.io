@@ -57,28 +57,44 @@
 </nav>
 
 <!-- HERO WITH VIDEO -->
+<!-- HERO : ANIMATED GRADIENT -->
 <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
 
-  <!-- VIDEO BACKGROUND -->
-  <video autoplay muted loop playsinline
-    class="absolute w-full h-full object-cover">
-    <source src="hero.mp4" type="video/mp4">
-  </video>
+  <!-- Animated Gradient Background -->
+  <div class="absolute inset-0 bg-gradient-to-br
+              from-green-400 via-emerald-500 to-teal-600
+              dark:from-indigo-600 dark:via-purple-700 dark:to-pink-600
+              animate-gradient">
+  </div>
 
-  <!-- OVERLAY -->
-  <div class="absolute inset-0 bg-black/60"></div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/40"></div>
 
-  <!-- CONTENT -->
+  <!-- Content -->
   <div class="relative z-10 px-6 animate-fade">
-    <h2 class="text-5xl font-extrabold mb-4">
-      Hi, I'm <span class="text-green-400">Palak</span> 👋
+    <h2 class="text-5xl md:text-6xl font-extrabold mb-4 text-white">
+      Hi, I'm <span class="text-green-200">Palak</span> 👋
     </h2>
-    <p class="text-xl text-gray-300 animate-slide">
+
+    <p class="text-xl md:text-2xl text-gray-200 animate-slide">
       Web Developer • Web3 Enthusiast
     </p>
-    <p class="mt-6 max-w-xl mx-auto text-gray-400">
-      Crafting decentralized, modern & secure web experiences
+
+    <p class="mt-6 max-w-xl mx-auto text-gray-200">
+      Building modern, decentralized and secure web experiences
     </p>
+
+    <div class="mt-8 flex justify-center gap-4">
+      <a href="#projects"
+         class="px-6 py-3 rounded-lg bg-white text-black font-semibold hover:scale-105 transition">
+        View Projects
+      </a>
+
+      <a href="#contact"
+         class="px-6 py-3 rounded-lg border border-white text-white hover:bg-white hover:text-black transition">
+        Contact Me
+      </a>
+    </div>
   </div>
 </section>
 
