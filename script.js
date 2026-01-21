@@ -3,9 +3,9 @@ function toggleDarkMode() {
   document.documentElement.classList.toggle("dark");
 }
 
-// ⌨️ Typing Animation
+// ⌨️ Typing Effect
 const texts = ["Web Developer", "Python & Django", "Tailwind CSS Lover"];
-let i = 0, j = 0, del = false;
+let i = 0, j = 0, deleting = false;
 const typing = document.getElementById("typing");
 
 function typeEffect() {
@@ -13,17 +13,17 @@ function typeEffect() {
 
   typing.textContent = texts[i].slice(0, j);
 
-  if (!del && j++ === texts[i].length) del = true;
-  if (del && j-- === 0) {
-    del = false;
+  if (!deleting && j++ === texts[i].length) deleting = true;
+  if (deleting && j-- === 0) {
+    deleting = false;
     i = (i + 1) % texts.length;
   }
 
-  setTimeout(typeEffect, del ? 60 : 120);
+  setTimeout(typeEffect, deleting ? 60 : 120);
 }
 typeEffect();
 
-// 👀 Scroll Reveal Animation
+// 👀 Scroll Reveal
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
