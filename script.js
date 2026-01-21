@@ -11,32 +11,39 @@ const typing = document.getElementById("typing");
 function typeEffect() {
   if (!typing) return;
 
-  typing.textContent = texts[i].slice(0, j);
+  const currentText = texts[i];
 
-  if (!deleting && j++ === texts[i].length) deleting = true;
-  if (deleting && j-- === 0) {
-    deleting = false;
-    i = (i + 1) % texts.length;
+  if (deleting) {
+    typing.textContent = currentText.slice(0, j);
+    if (j === 0) {
+      deleting = false;
+      i = (i + 1) % texts.length;
+    } else {
+      j--;
+    }
+  } else {
+    typing.textContent = currentText.slice(0, j);
+    if (j === currentText.length) {
+      deleting = true;
+      setTimeout(typeEffect, 1500); // Pause at end
+      return;
+    } else {
+      j++;
+    }
   }
 
-  setTimeout(typeEffect, deleting ? 60 : 120);
+  setTimeout(typeEffect, deleting ? 50 : 100);
 }
 typeEffect();
 
 // 👀 Scroll Reveal
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("active");
-    }
-  });
+  entries.forEach(e => e.isIntersecting && e.target.classList.add("active"));
 }, { threshold: 0.15 });
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 // 📊 Skill Bar Animation
 document.querySelectorAll(".bar").forEach(bar => {
-  setTimeout(() => {
-    bar.style.width = bar.dataset.level + "%";
-  }, 600);
+  setTimeout(() => bar.style.width = bar.dataset.level + "%", 600);
 });
