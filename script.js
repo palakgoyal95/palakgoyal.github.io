@@ -1,49 +1,48 @@
-// 🌙 Dark Mode Toggle
-function toggleDarkMode() {
-  document.documentElement.classList.toggle("dark");
-}
+/* DARK / LIGHT MODE */
+const toggleBtn = document.getElementById("themeToggle");
+const html = document.documentElement;
 
-// ⌨️ Typing Effect
-const texts = ["Web Developer", "Python & Django", "Tailwind CSS Lover"];
-let i = 0, j = 0, deleting = false;
-const typing = document.getElementById("typing");
+toggleBtn.addEventListener("click", () => {
+  html.classList.toggle("dark");
+  toggleBtn.textContent = html.classList.contains("dark") ? "☀️" : "🌙";
+});
+
+/* TYPING ANIMATION */
+const texts = [
+  "Python Developer",
+  "Django Backend Enthusiast",
+  "Tailwind CSS Lover",
+  "Problem Solver"
+];
+
+let textIndex = 0, charIndex = 0, deleting = false;
+const typingEl = document.getElementById("typing");
 
 function typeEffect() {
-  if (!typing) return;
+  const current = texts[textIndex];
+  typingEl.textContent = deleting
+    ? current.slice(0, --charIndex)
+    : current.slice(0, ++charIndex);
 
-  const currentText = texts[i];
-
-  if (deleting) {
-    typing.textContent = currentText.slice(0, j);
-    if (j === 0) {
-      deleting = false;
-      i = (i + 1) % texts.length;
-    } else {
-      j--;
-    }
-  } else {
-    typing.textContent = currentText.slice(0, j);
-    if (j === currentText.length) {
-      deleting = true;
-      setTimeout(typeEffect, 1500); // Pause at end
-      return;
-    } else {
-      j++;
-    }
+  if (!deleting && charIndex === current.length) deleting = true;
+  if (deleting && charIndex === 0) {
+    deleting = false;
+    textIndex = (textIndex + 1) % texts.length;
   }
 
-  setTimeout(typeEffect, deleting ? 50 : 100);
+  setTimeout(typeEffect, deleting ? 60 : 120);
 }
 typeEffect();
 
-// 👀 Scroll Reveal
+/* SCROLL REVEAL */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => e.isIntersecting && e.target.classList.add("active"));
 }, { threshold: 0.15 });
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-// 📊 Skill Bar Animation
-document.querySelectorAll(".bar").forEach(bar => {
-  setTimeout(() => bar.style.width = bar.dataset.level + "%", 600);
+/* CURSOR GLOW */
+const glow = document.getElementById("cursor-glow");
+document.addEventListener("mousemove", e => {
+  glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
 });

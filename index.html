@@ -12,30 +12,106 @@
     tailwind.config = { darkMode: 'class' }
   </script>
 
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet">
+
   <style>
+    /* =========================
+   CURSOR FOLLOW GLOW
+========================= */
+    #cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle,
+          rgba(236, 72, 153, 0.35),
+          rgba(236, 72, 153, 0.18),
+          transparent 70%);
+      filter: blur(90px);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    /* =========================
+   FLOATING BLOBS
+========================= */
+    .blob {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: float 18s ease-in-out infinite;
+    }
+
+    .blob-1 {
+      background: #ec4899;
+      top: 10%;
+      left: 10%;
+    }
+
+    .blob-2 {
+      background: #a855f7;
+      top: 55%;
+      right: 12%;
+      animation-delay: 4s;
+    }
+
+    .blob-3 {
+      background: #f472b6;
+      bottom: 10%;
+      left: 40%;
+      animation-delay: 8s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+
+      50% {
+        transform: translateY(-40px) translateX(30px);
+      }
+
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
-    /* Glass effect */
+    body {
+      font-family: 'Inter', system-ui;
+    }
+
     .glass {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(16px);
-      border-radius: 1.25rem;
-      padding: 2rem;
-      transition: 0.3s;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(18px);
+      border-radius: 1.75rem;
+      transition: .4s;
     }
 
     .glass:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
+      transform: translateY(-14px);
+      box-shadow: 0 35px 90px rgba(236, 72, 153, .4);
     }
 
-    /* Reveal animation */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: .8s ease;
+      transform: translateY(50px);
+      transition: .9s ease;
     }
 
     .reveal.active {
@@ -43,166 +119,517 @@
       transform: translateY(0);
     }
 
-    /* Skill bar */
-    .bar {
-      height: 10px;
-      width: 0;
-      border-radius: 999px;
-      background: linear-gradient(to right, #38bdf8, #6366f1);
-      transition: width 1.2s ease;
+    .section-title {
+      font-family: 'Poppins', system-ui;
     }
 
-    /* Blob animation */
-    @keyframes blob {
+    /* =========================
+   SOFT BACKGROUND NOISE
+========================= */
+    .noise-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      animation: noiseMove 6s steps(2) infinite;
+    }
+
+    /* Dark mode tweak (so it doesn’t overpower) */
+    .dark .noise-layer {
+      opacity: 0.05;
+    }
+
+    @keyframes noiseMove {
       0% {
-        transform: translate(0, 0) scale(1);
+        transform: translate(0, 0);
       }
 
-      33% {
-        transform: translate(30px, -40px) scale(1.1);
-      }
-
-      66% {
-        transform: translate(-20px, 20px) scale(.95);
+      50% {
+        transform: translate(-1px, 1px);
       }
 
       100% {
-        transform: translate(0, 0) scale(1);
+        transform: translate(0, 0);
       }
-    }
-
-    .animate-blob {
-      animation: blob 12s infinite;
-    }
-
-    .delay-2 {
-      animation-delay: 2s;
     }
   </style>
 </head>
 
-<body class="bg-gray-100 text-gray-900 dark:bg-slate-900 dark:text-gray-100 overflow-x-hidden">
+<body class="bg-gradient-to-b from-pink-50 via-rose-50 to-white
+             dark:from-slate-900 dark:to-slate-800
+             text-gray-900 dark:text-gray-100">
 
-  <!-- Animated blue blobs -->
-  <div class="fixed -top-40 -left-40 w-96 h-96 bg-blue-400/30 rounded-full blur-3xl animate-blob"></div>
-  <div class="fixed top-60 -right-40 w-96 h-96 bg-cyan-400/30 rounded-full blur-3xl animate-blob delay-2"></div>
+  <!-- 🌸 NAVBAR -->
+  <nav class="fixed w-full top-0 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
 
-  <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full z-50 px-8 py-4 flex justify-between items-center
-bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl shadow-lg">
+      <h1 class="text-xl font-black bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
+        PG
+      </h1>
 
-    <h1 class="font-extrabold text-xl bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
-      Palak Goyal
-    </h1>
+      <ul class="hidden md:flex gap-8 font-medium">
+        <li><a href="#home" class="hover:text-pink-500">Home</a></li>
+        <li><a href="#what-i-do" class="hover:text-pink-500">What I Do</a></li>
+        <li><a href="#tech" class="hover:text-pink-500">Tech</a></li>
+        <li><a href="#projects" class="hover:text-pink-500">Projects</a></li>
+        <li><a href="#contact" class="hover:text-pink-500">Contact</a></li>
+      </ul>
 
-    <ul class="hidden md:flex gap-8 font-medium">
-      <li><a href="#home" class="hover:text-blue-500">Home</a></li>
-      <li><a href="#about" class="hover:text-blue-500">About</a></li>
-      <li><a href="#skills" class="hover:text-blue-500">Skills</a></li>
-      <li><a href="#projects" class="hover:text-blue-500">Projects</a></li>
-      <li><a href="#contact" class="hover:text-blue-500">Contact</a></li>
-    </ul>
+      <!-- Dark / Light Toggle -->
+      <button id="themeToggle" class="px-3 py-2 rounded bg-pink-100 dark:bg-slate-700">
+        🌙
+      </button>
 
-    <button onclick="toggleDarkMode()" class="px-3 py-2 rounded bg-gray-200 dark:bg-slate-700">
-      🌙
-    </button>
+    </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="home" class="min-h-screen flex items-center justify-center text-center px-6">
+  <!-- ================= HERO ================= -->
+  <section id="home" class="min-h-screen flex items-center justify-center text-center px-6 pt-24">
     <div class="reveal">
-      <h2 class="text-5xl md:text-6xl font-extrabold mb-4">
-        Hi, I'm
-        <span class="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+      <h2 class="section-title text-6xl font-black mb-4">
+        Hi, I’m
+        <span class="bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
           Palak
         </span>
       </h2>
 
-      <p class="text-2xl text-gray-600 dark:text-gray-400 h-10">
+      <p class="text-2xl h-10 text-gray-600 dark:text-gray-400">
         <span id="typing"></span>
       </p>
 
-      <p class="mt-6 text-gray-600 dark:text-gray-400">
-        Building modern, dynamic & real-world web applications.
+      <p class="mt-6 max-w-xl mx-auto text-gray-600 dark:text-gray-400">
+        Python & backend-focused developer passionate about building
+        real-world, database-driven applications with modern UI.
       </p>
 
       <div class="mt-8 flex justify-center gap-4">
-        <a href="#projects" class="px-6 py-3 bg-blue-500 text-white rounded-xl hover:scale-105 transition">
+        <a href="#projects" class="px-6 py-3 bg-pink-500 text-white rounded-xl hover:scale-105 transition">
           View Projects
         </a>
-        <a href="#contact"
-          class="px-6 py-3 border border-blue-500 text-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition">
+        <a href="#contact" class="px-6 py-3 border border-pink-500 text-pink-500 rounded-xl
+               hover:bg-pink-500 hover:text-white transition">
           Contact Me
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="max-w-5xl mx-auto px-6 py-24 reveal">
-    <h3 class="text-4xl font-bold mb-8 text-center">About Me</h3>
-    <div class="glass text-center space-y-4">
-      <p>I am a passionate developer who loves building clean and responsive web applications.</p>
-      <p>Most of my learning comes from hands-on projects like Fantasy Cricket apps and portfolio websites.</p>
-      <p>Currently focused on Django, REST APIs and Tailwind CSS.</p>
+  <!-- 🌸 WHAT I DO -->
+  <section id="what-i-do" class="py-28 px-6 bg-[#fff6f8] dark:bg-[#1e1b2e] transition-colors">
+
+    <div class="max-w-6xl mx-auto text-center">
+
+      <!-- Heading -->
+      <h2 class="text-5xl md:text-6xl font-extrabold mb-6
+        bg-gradient-to-r from-pink-500 to-fuchsia-500
+        bg-clip-text text-transparent" style="font-family:'Poppins',system-ui;">
+        What I Do
+      </h2>
+
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-20 text-lg">
+        I focus on turning ideas into practical applications
+        with clean logic, smooth user experience, and scalable structure.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-12">
+
+        <!-- Card 1 -->
+        <div class="glass p-9">
+          <h3 class="text-xl font-semibold text-pink-600 mb-4">
+            🧠 Problem Solving
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 dark:text-gray-900">
+            I break down real-world problems into logical steps
+            and design efficient solutions using Python and structured thinking.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass p-9">
+          <h3 class="text-xl font-semibold text-fuchsia-600 mb-4">
+            🏗 Backend Development
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 dark:text-gray-900">
+            I build backend systems that handle data, logic,
+            and workflows using Django and database-driven design.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass p-9">
+          <h3 class="text-xl font-semibold text-rose-600 mb-4">
+            🎨 Clean UI Integration
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 dark:text-gray-900">
+            I connect backend functionality with clean,
+            responsive interfaces using Tailwind CSS and JavaScript.
+          </p>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="max-w-5xl mx-auto px-6 py-20 reveal">
-    <h3 class="text-4xl font-bold mb-10 text-center">Skills</h3>
-    <div class="space-y-5">
-      <div>Django<div class="bar" data-level="85"></div>
+
+  <!-- 🌸 TECHNICAL STACK (BALANCED & LIVING) -->
+  <section id="tech" class="py-28 px-6 bg-[#fff1f5] dark:bg-[#1e1b2e] transition-colors">
+
+    <!-- Floating gradient layers -->
+    <div class="absolute -top-40 -left-40 w-[30rem] h-[30rem]
+           bg-gradient-to-br from-pink-400/25 to-rose-400/25
+           rounded-full blur-3xl animate<!-- 🌸 WHAT I DO -->
+<section id=" what-i-do" class="py-28 px-6 bg-[#fff6f8] dark:bg-[#1e1b2e] transition-colors">
+
+      <div class="max-w-6xl mx-auto text-center">
+
+        <!-- Heading -->
+        <h2 class="text-5xl md:text-6xl font-extrabold mb-6
+        bg-gradient-to-r from-pink-500 to-fuchsia-500
+        bg-clip-text text-transparent" style="font-family:'Poppins',system-ui;">
+          What I Do
+        </h2>
+
+        <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-20 text-lg">
+          I focus on turning ideas into practical applications
+          with clean logic, smooth user experience, and scalable structure.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-12">
+
+          <!-- Card 1 -->
+          <div class="glass p-9">
+            <h3 class="text-xl font-semibold text-pink-600 mb-4">
+              🧠 Problem Solving
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              I break down real-world problems into logical steps
+              and design efficient solutions using Python and structured thinking.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass p-9">
+            <h3 class="text-xl font-semibold text-fuchsia-600 mb-4">
+              🏗 Backend Development
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              I build backend systems that handle data, logic,
+              and workflows using Django and database-driven design.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass p-9">
+            <h3 class="text-xl font-semibold text-rose-600 mb-4">
+              🎨 Clean UI Integration
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              I connect backend functionality with clean,
+              responsive interfaces using Tailwind CSS and JavaScript.
+            </p>
+          </div>
+
+        </div>
       </div>
-      <div>Python<div class="bar" data-level="90"></div>
+  </section>
+
+
+  <div class="absolute top-48 -right-40 w-[30rem] h-[30rem]
+           bg-gradient-to-br from-fuchsia-400/25 to-purple-400/25
+           rounded-full blur-3xl animate-pulse"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+
+    <!-- Heading -->
+    <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight text-center mb-6
+             bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600
+             bg-clip-text text-transparent" style="font-family: 'Poppins', system-ui, sans-serif;">
+      Technical Stack
+    </h2>
+
+    <p class="text-center text-gray-700 dark:text-gray-400 d
+             mb-20 max-w-2xl mx-auto text-lg" style="font-family: 'Inter', system-ui, sans-serif;">
+      Technologies and tools I actively work with to design,
+      build, and improve practical software solutions.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-12">
+
+      <!-- BACKEND -->
+      <div class="group relative p-9 rounded-3xl
+               bg-white/85  backdrop-blur-xl
+               shadow-lg transition-all duration-500
+               hover:-translate-y-5
+               hover:shadow-[0_35px_80px_rgba(236,72,153,.35)]">
+        <div class="absolute inset-0 rounded-3xl
+                 bg-gradient-to-br from-rose-400/20 to-pink-400/20
+                 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
+
+        <div class="relative">
+          <h3 class="text-xl font-semibold mb-4 text-rose-600 flex items-center gap-3"
+            style="font-family: 'Poppins', system-ui, sans-serif;">
+            💻 Backend Development
+          </h3>
+
+          <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
+            style="font-family: 'Inter', system-ui, sans-serif;">
+            <li>Python (core logic & advanced concepts)</li>
+            <li>Django fundamentals and MVC structure</li>
+            <li>RESTful APIs and CRUD operations</li>
+            <li>SQLite database integration</li>
+          </ul>
+        </div>
       </div>
-      <div>HTML<div class="bar" data-level="95"></div>
+
+      <!-- FRONTEND -->
+      <div class="group relative p-9 rounded-3xl
+               bg-white/85  backdrop-blur-xl
+               shadow-lg transition-all duration-500
+               hover:-translate-y-5
+               hover:shadow-[0_35px_80px_rgba(217,70,239,.35)]">
+        <div class="absolute inset-0 rounded-3xl
+                 bg-gradient-to-br from-fuchsia-400/20 to-purple-400/20
+                 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
+
+        <div class="relative">
+          <h3 class="text-xl font-semibold mb-4 text-fuchsia-600 flex items-center gap-3"
+            style="font-family: 'Poppins', system-ui, sans-serif;">
+            🎨 Frontend & UI Design
+          </h3>
+
+          <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
+            style="font-family: 'Inter', system-ui, sans-serif;">
+            <li>Semantic HTML5 structure</li>
+            <li>Tailwind CSS for responsive layouts</li>
+            <li>JavaScript (DOM manipulation & animations)</li>
+            <li>Modern UI patterns and accessibility basics</li>
+          </ul>
+        </div>
       </div>
-      <div>Tailwind CSS<div class="bar" data-level="90"></div>
+
+      <!-- TOOLS -->
+      <div class="group relative p-9 rounded-3xl
+               bg-white/85  backdrop-blur-xl
+               shadow-lg transition-all duration-500
+               hover:-translate-y-5
+               hover:shadow-[0_35px_80px_rgba(244,63,94,.35)]">
+        <div class="absolute inset-0 rounded-3xl
+                 bg-gradient-to-br from-pink-400/20 to-rose-400/20
+                 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
+
+        <div class="relative">
+          <h3 class="text-xl font-semibold mb-4 text-pink-600 flex items-center gap-3"
+            style="font-family: 'Poppins', system-ui, sans-serif;">
+            ⚙️ Tools & Workflow
+          </h3>
+
+          <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
+            style="font-family: 'Inter', system-ui, sans-serif;">
+            <li>Git version control and GitHub collaboration</li>
+            <li>Deployment using GitHub Pages</li>
+            <li>VS Code for development and debugging</li>
+            <li>Clean project structuring practices</li>
+          </ul>
+        </div>
       </div>
-      <div>JavaScript<div class="bar" data-level="80"></div>
+
+    </div>
+  </div>
+  </section>
+
+
+  <!-- 📂 PROJECTS -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-24">
+
+    <h2 class="section-title text-5xl md:text-6xl font-extrabold tracking-tight text-center mb-16 reveal
+  bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600
+  bg-clip-text text-transparent">
+      Projects
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <div class="glass p-8 border-2 border-pink-400 reveal">
+        <h4 class="font-bold text-xl mb-3 dark:text-rose-600">🏏 Fantasy Cricket Application</h4>
+        <p class="text-gray-600 dark:text-gray-900 mb-4">
+          Python-based fantasy cricket system with scoring logic,
+          player selection, and database handling.
+        </p>
+        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank" class="text-pink-500 hover:underline">
+          View on GitHub →
+        </a>
       </div>
+
+      <div class="glass p-8 reveal">
+        <h4 class="font-bold text-xl mb-3 dark:text-fuchsia-600">🛒 Grocery Management System</h4>
+        <p class="text-gray-600 dark:text-gray-900 mb-4">
+          CLI-based Python + SQLite CRUD application for managing grocery items.
+        </p>
+        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank" class="text-pink-500 hover:underline">
+          View on GitHub →
+        </a>
+      </div>
+
+      <div class="glass p-8 reveal">
+        <h4 class="font-bold text-xl mb-3 dark:text-pink-600">🎮 Python Mini Projects</h4>
+        <p class="text-gray-600 dark:text-gray-900 mb-4">
+          Collection of Python mini projects including games and logic-based scripts.
+        </p>
+        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank" class="text-pink-500 hover:underline">
+          View on GitHub →
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="max-w-6xl mx-auto px-6 py-20">
-    <h3 class="text-4xl font-bold mb-12 text-center reveal">Projects</h3>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="glass reveal">
-        <h4 class="font-bold mb-2">🏏 Fantasy Cricket App</h4>
-        <p class="mb-3 text-gray-600 dark:text-gray-400">Python + SQLite based project.</p>
-        <a href="https://github.com/palakgoyal" class="text-blue-500">View GitHub</a>
-      </div>
-      <div class="glass reveal">
-        <h4 class="font-bold mb-2">🌐 Website Project</h4>
-        <p class="mb-3 text-gray-600 dark:text-gray-400">Responsive website using Tailwind.</p>
-        <a href="https://github.com/palakgoyal" class="text-blue-500">View GitHub</a>
-      </div>
-      <div class="glass reveal">
-        <h4 class="font-bold mb-2">💼 Portfolio</h4>
-        <p class="mb-3 text-gray-600 dark:text-gray-400">Personal portfolio deployed on GitHub Pages.</p>
-        <a href="https://github.com/palakgoyal" class="text-blue-500">View GitHub</a>
-      </div>
+  <!-- 🤍 CONTACT -->
+  <section id="contact" class="py-32 px-6 bg-[#fff6f8] dark:bg-slate-900">
+
+    <div class="max-w-4xl mx-auto text-center">
+
+      <h2 class="section-title text-5xl md:text-6xl font-extrabold tracking-tight mb-6
+    bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600
+    bg-clip-text text-transparent">
+        Contact Me
+      </h2>
+
+      <p class="text-gray-600 dark:text-gray-400 mb-14 max-w-xl mx-auto">
+        Let’s connect! Feel free to message me for projects,
+        internships, collaborations, or just a friendly hello.
+      </p>
+
+      <!-- FORM CARD -->
+      <form action="mailto:palak@example.com" method="post" enctype="text/plain" class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl
+         rounded-3xl p-10
+         shadow-[0_25px_70px_rgba(0,0,0,0.12)]
+         space-y-6 transition">
+
+        <!-- Name -->
+        <div class="relative">
+          <input type="text" required placeholder=" " class="peer w-full p-4 rounded-xl border border-gray-300
+             bg-transparent
+             focus:border-pink-500
+             focus:ring-4 focus:ring-pink-300/30
+             outline-none transition" />
+          <label class="absolute left-4 top-4 text-gray-500
+             peer-focus:-top-3 peer-focus:text-sm peer-focus:text-pink-500
+             peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
+             transition-all
+             bg-white dark:bg-slate-800 px-2 rounded">
+            Your Name
+          </label>
+        </div>
+
+        <!-- Email -->
+        <div class="relative">
+          <input type="email" required placeholder=" " class="peer w-full p-4 rounded-xl border border-gray-300
+             bg-transparent
+             focus:border-pink-500
+             focus:ring-4 focus:ring-pink-300/30
+             outline-none transition" />
+          <label class="absolute left-4 top-4 text-gray-500
+             peer-focus:-top-3 peer-focus:text-sm peer-focus:text-pink-500
+             peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
+             transition-all
+             bg-white dark:bg-slate-800 px-2 rounded">
+            Your Email
+          </label>
+        </div>
+
+        <!-- Message -->
+        <div class="relative">
+          <textarea rows="4" required placeholder=" " class="peer w-full p-4 rounded-xl border border-gray-300
+             bg-transparent resize-none
+             focus:border-pink-500
+             focus:ring-4 focus:ring-pink-300/30
+             outline-none transition"></textarea>
+          <label class="absolute left-4 top-4 text-gray-500
+             peer-focus:-top-3 peer-focus:text-sm peer-focus:text-pink-500
+             peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
+             transition-all
+             bg-white dark:bg-slate-800 px-2 rounded">
+            Your Message
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="w-full py-4 rounded-xl font-semibold text-white
+           bg-pink-500 hover:bg-pink-600
+           transition transform hover:-translate-y-1
+           shadow-lg hover:shadow-[0_15px_40px_rgba(236,72,153,.45)]">
+          Send Message
+        </button>
+
+      </form>
+
+      <!-- CONNECT WITH ME -->
+      <section class="py-24 bg-[#fff7f9] dark:bg-slate-900">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+          <h2
+            class="text-4xl font-extrabold mb-3 text-pink-600 bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent">
+            Connect With Me </h2>
+          <p class="text-gray-600 mb-16 dark:text-gray-400"> You can find me on these platforms </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Email -->
+            <a href="mailto:palak@example.com"
+              class="group bg-[#fdecef] rounded-3xl p-10 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" class="w-14 mx-auto mb-6"
+                alt="Email Logo">
+              <h3 class="text-xl font-semibold mb-1 text-gray-900">Email</h3>
+              <p class="text-gray-600">palak@example.com</p>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/palakgoyal95" target="_blank"
+              class="group bg-[#f3f0ff] rounded-3xl p-10 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"
+                class="w-14 mx-auto mb-6" alt="GitHub Logo">
+              <h3 class="text-xl font-semibold mb-1 text-gray-900">GitHub</h3>
+              <p class="text-gray-600">github.com/palakgoyal95</p>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/palakgoyal" target="_blank"
+              class="group bg-[#eef6ff] rounded-3xl p-10 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
+                class="w-14 mx-auto mb-6" alt="LinkedIn Logo">
+              <h3 class="text-xl font-semibold mb-1 text-gray-900">LinkedIn</h3>
+              <p class="text-gray-600">linkedin.com/in/palakgoyal</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="max-w-4xl mx-auto px-6 py-20 text-center reveal">
-    <h3 class="text-4xl font-bold mb-6">Contact</h3>
-    <div class="flex justify-center gap-6">
-      <a href="mailto:palak@example.com" class="hover:text-blue-500">📧 Email</a>
-      <a href="https://github.com/palakgoyal" class="hover:text-blue-500">💻 GitHub</a>
-      <a href="https://linkedin.com" class="hover:text-blue-500">🔗 LinkedIn</a>
-    </div>
-  </section>
+  <!-- 🌸 FOOTER -->
+  <footer class="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-white text-sm">
+        © 2026 <span class="font-semibold">Palak Goyal</span>. Building modern web applications with passion.
+      </p>
 
-  <footer class="text-center py-6 text-gray-500">
-    © 2026 Palak Goyal • Built with Tailwind CSS
+      <div class="flex gap-4">
+        <a href="https://github.com/palakgoyal95" target="_blank"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white transition">
+          <i class="fab fa-github text-white"></i>
+        </a>
+        <a href="https://linkedin.com/in/palakgoyal" target="_blank"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white transition">
+          <i class="fab fa-linkedin text-white"></i>
+        </a>
+        <a href="mailto:palak@example.com"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white transition">
+          <i class="fas fa-envelope text-white"></i>
+        </a>
+      </div>
+    </div>
   </footer>
 
-  <!-- 🔗 CONNECT JS FILE (VERY IMPORTANT) -->
-  <script src="./script.js"></script>
+  <!-- JS FILE -->
+  <script src="script.js"></script>
 
 </body>
 
