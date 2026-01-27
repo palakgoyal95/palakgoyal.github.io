@@ -161,14 +161,18 @@
              dark:from-slate-900 dark:to-slate-800
              text-gray-900 dark:text-gray-100">
 
+
+
   <!-- 🌸 NAVBAR -->
   <nav class="fixed w-full top-0 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow">
     <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
 
+      <!-- Logo -->
       <h1 class="text-xl font-black bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
         PG
       </h1>
 
+      <!-- Center Navigation -->
       <ul class="hidden md:flex gap-8 font-medium">
         <li><a href="#home" class="hover:text-pink-500">Home</a></li>
         <li><a href="#what-i-do" class="hover:text-pink-500">What I Do</a></li>
@@ -177,13 +181,28 @@
         <li><a href="#contact" class="hover:text-pink-500">Contact</a></li>
       </ul>
 
-      <!-- Dark / Light Toggle -->
-      <button id="themeToggle" class="px-3 py-2 rounded bg-pink-100 dark:bg-slate-700">
-        🌙
-      </button>
+      <!-- Right Actions -->
+      <div class="flex items-center gap-4">
+
+        <!-- Resume Button -->
+        <a href="Palak_Goyal_Resume.pdf" download class="px-6 py-2 rounded-xl
+               bg-pink-500 text-white font-semibold
+               hover:bg-pink-600 hover:scale-105
+               transition shadow-md">
+          Resume
+        </a>
+
+        <!-- Dark / Light Toggle -->
+        <button id="themeToggle" class="px-3 py-2 rounded bg-pink-100 dark:bg-slate-700 transition">
+          🌙
+        </button>
+
+      </div>
 
     </div>
   </nav>
+
+
 
   <!-- ================= HERO ================= -->
   <section id="home" class="min-h-screen flex items-center justify-center text-center px-6 pt-24">
@@ -595,7 +614,7 @@
               <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
                 class="w-14 mx-auto mb-6" alt="LinkedIn Logo">
               <h3 class="text-xl font-semibold mb-1 text-gray-900">LinkedIn</h3>
-              <p class="text-gray-600">https://www.linkedin.com/in/palak-goyal-b86909235/</p>
+              <p class="text-gray-600"> linkedin.com/in/palak-goyal</p>
             </a>
           </div>
         </div>
