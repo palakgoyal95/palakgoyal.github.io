@@ -6,24 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Palak Goyal | Portfolio</title>
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' }
   </script>
 
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500&display=swap"
     rel="stylesheet">
 
   <style>
-    /* =========================
-   CURSOR FOLLOW GLOW
-========================= */
     #cursor-glow {
       position: fixed;
       top: 0;
@@ -32,18 +26,12 @@
       height: 360px;
       border-radius: 50%;
       pointer-events: none;
-      background: radial-gradient(circle,
-          rgba(236, 72, 153, 0.35),
-          rgba(236, 72, 153, 0.18),
-          transparent 70%);
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.35), rgba(236, 72, 153, 0.18), transparent 70%);
       filter: blur(90px);
       transform: translate(-50%, -50%);
       z-index: 0;
     }
 
-    /* =========================
-   FLOATING BLOBS
-========================= */
     .blob {
       position: absolute;
       width: 320px;
@@ -123,9 +111,6 @@
       font-family: 'Poppins', system-ui;
     }
 
-    /* =========================
-   SOFT BACKGROUND NOISE
-========================= */
     .noise-layer {
       position: absolute;
       inset: 0;
@@ -133,47 +118,30 @@
       pointer-events: none;
       opacity: 0.08;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-      animation: noiseMove 6s steps(2) infinite;
-    }
-
-    /* Dark mode tweak (so it doesn’t overpower) */
-    .dark .noise-layer {
-      opacity: 0.05;
-    }
-
-    @keyframes noiseMove {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      50% {
-        transform: translate(-1px, 1px);
-      }
-
-      100% {
-        transform: translate(0, 0);
-      }
     }
   </style>
 </head>
 
-<body class="bg-gradient-to-b from-pink-50 via-rose-50 to-white
-             dark:from-slate-900 dark:to-slate-800
-             text-gray-900 dark:text-gray-100">
+<body
+  class="bg-gradient-to-b from-pink-50 via-rose-50 to-white dark:from-slate-900 dark:to-slate-800 text-gray-900 dark:text-gray-100">
 
+  <div id="cursor-glow"></div>
 
-
-  <!-- 🌸 NAVBAR -->
   <nav class="fixed w-full top-0 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow">
-    <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center relative">
+
+      <!-- LEFT: Mobile Menu Button -->
+      <button id="menuBtn" class="md:hidden text-2xl text-pink-600 focus:outline-none">
+        ☰
+      </button>
 
       <!-- Logo -->
       <h1 class="text-xl font-black bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
         PG
       </h1>
 
-      <!-- Center Navigation -->
-      <ul class="hidden md:flex gap-8 font-medium">
+      <!-- CENTER MENU (DESKTOP ONLY) -->
+      <ul class="hidden md:flex gap-8 font-medium absolute left-1/2 transform -translate-x-1/2">
         <li><a href="#home" class="hover:text-pink-500">Home</a></li>
         <li><a href="#what-i-do" class="hover:text-pink-500">What I Do</a></li>
         <li><a href="#tech" class="hover:text-pink-500">Tech</a></li>
@@ -181,475 +149,399 @@
         <li><a href="#contact" class="hover:text-pink-500">Contact</a></li>
       </ul>
 
-      <!-- Right Actions -->
+      <!-- RIGHT ACTIONS -->
       <div class="flex items-center gap-4">
-
-        <!-- Resume Button -->
-        <a href="Palak_Goyal_Resume.pdf" download class="px-6 py-2 rounded-xl
-               bg-pink-500 text-white font-semibold
-               hover:bg-pink-600 hover:scale-105
-               transition shadow-md">
+        <a href="Palak_Goyal_Resume.pdf" download
+          class="hidden sm:inline px-6 py-2 rounded-xl bg-pink-500 text-white font-semibold hover:bg-pink-600 hover:scale-105 transition shadow-md">
           Resume
         </a>
 
-        <!-- Dark / Light Toggle -->
         <button id="themeToggle" class="px-3 py-2 rounded bg-pink-100 dark:bg-slate-700 transition">
           🌙
         </button>
-
       </div>
+    </div>
 
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+      class="hidden md:hidden bg-white/90 dark:bg-slate-800/95 backdrop-blur-xl border-t border-pink-200">
+      <ul class="flex flex-col items-center gap-6 py-6 font-medium">
+        <li><a href="#home" class="hover:text-pink-500">Home</a></li>
+        <li><a href="#what-i-do" class="hover:text-pink-500">What I Do</a></li>
+        <li><a href="#tech" class="hover:text-pink-500">Tech</a></li>
+        <li><a href="#projects" class="hover:text-pink-500">Projects</a></li>
+        <li><a href="#contact" class="hover:text-pink-500">Contact</a></li>
+
+        <a href="Palak_Goyal_Resume.pdf" download
+          class="mt-2 px-6 py-2 rounded-xl bg-pink-500 text-white font-semibold shadow-md">
+          Resume
+        </a>
+      </ul>
     </div>
   </nav>
 
 
-
-  <!-- ================= HERO ================= -->
   <section id="home" class="min-h-screen flex items-center justify-center text-center px-6 pt-24">
     <div class="reveal">
-      <h2 class="section-title text-6xl font-black mb-4">
-        Hi, I’m
-        <span class="bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
-          Palak
-        </span>
+      <h2 class="section-title text-5xl md:text-6xl font-black mb-4">
+        Hi, I’m <span class="bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">Palak</span>
       </h2>
-
       <p class="text-2xl h-10 text-gray-600 dark:text-gray-400">
         <span id="typing"></span>
       </p>
-
       <p class="mt-6 max-w-xl mx-auto text-gray-600 dark:text-gray-400">
-        Python & backend-focused developer passionate about building
-        real-world, database-driven applications with modern UI.
+        Python & backend-focused developer passionate about building real-world, database-driven applications with
+        modern UI.
       </p>
-
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="#projects" class="px-6 py-3 bg-pink-500 text-white rounded-xl hover:scale-105 transition">
-          View Projects
-        </a>
-        <a href="#contact" class="px-6 py-3 border border-pink-500 text-pink-500 rounded-xl
-               hover:bg-pink-500 hover:text-white transition">
-          Contact Me
-        </a>
+      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#projects" class="px-6 py-3 bg-pink-500 text-white rounded-xl hover:scale-105 transition">View
+          Projects</a>
+        <a href="#contact"
+          class="px-6 py-3 border border-pink-500 text-pink-500 rounded-xl hover:bg-pink-500 hover:text-white transition">Contact
+          Me</a>
       </div>
     </div>
   </section>
 
-  <!-- 🌸 WHAT I DO -->
   <section id="what-i-do" class="py-28 px-6 bg-[#fff6f8] dark:bg-[#1e1b2e] transition-colors">
-
     <div class="max-w-6xl mx-auto text-center">
-
-      <!-- Heading -->
-      <h2 class="text-5xl md:text-6xl font-extrabold mb-6
-        bg-gradient-to-r from-pink-500 to-fuchsia-500
-        bg-clip-text text-transparent" style="font-family:'Poppins',system-ui;">
-        What I Do
-      </h2>
-
+      <h2
+        class="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
+        What I Do</h2>
       <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-20 text-lg">
-        I focus on turning ideas into practical applications
-        with clean logic, smooth user experience, and scalable structure.
+        I focus on turning ideas into practical applications with clean logic, smooth user experience, and scalable
+        structure.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="glass p-9 border-2 border-pink-400">
+          <h3 class="text-xl font-semibold text-pink-600 mb-4">🧠 Problem Solving</h3>
+          <p class="text-gray-600 dark:text-gray-900">I break down real-world problems into logical steps using Python
+            and structured thinking.</p>
+        </div>
+        <div class="glass p-9 border-2 border-pink-400">
+          <h3 class="text-xl font-semibold text-fuchsia-600 mb-4">🏗 Backend Development</h3>
+          <p class="text-gray-600 dark:text-gray-900">I build backend systems that handle data, logic, and workflows
+            using Django and database-driven design.</p>
+        </div>
+        <div class="glass p-9 border-2 border-pink-400">
+          <h3 class="text-xl font-semibold text-rose-600 mb-4">🎨 Clean UI Integration</h3>
+          <p class="text-gray-600 dark:text-gray-900">I connect backend functionality with clean, responsive interfaces
+            using Tailwind CSS and JavaScript.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech"
+    class="py-20 md:py-28 px-6 bg-[#fff7fa] dark:bg-[#1e1b2e] transition-colors relative overflow-hidden">
+
+
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <h2
+        class="text-4xl md:text-6xl font-extrabold text-center mb-6 bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent"
+        style="font-family: 'Poppins', sans-serif;">
+        Technical Stack
+      </h2>
+      <p class="text-center text-gray-700 dark:text-gray-400 mb-16 max-w-2xl mx-auto text-lg"
+        style="font-family: 'Inter', sans-serif;">
+        Technologies and tools I actively work with to design, build, and improve practical software solutions.
       </p>
 
-      <div class="grid md:grid-cols-3 gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
 
-        <!-- Card 1 -->
-        <div class="glass p-9">
-          <h3 class="text-xl font-semibold text-pink-600 mb-4">
-            🧠 Problem Solving
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 dark:text-gray-900">
-            I break down real-world problems into logical steps
-            and design efficient solutions using Python and structured thinking.
-          </p>
+        <div class="group relative p-9 rounded-3xl bg-white/85  backdrop-blur-xl 
+          border-2 border-pink-400 shadow-lg transition-all duration-500 
+          hover:-translate-y-5 hover:shadow-[0_35px_80px_rgba(236,72,153,.35)]">
+
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-br from-rose-400/10 to-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          </div>
+
+          <div class="relative">
+            <h3 class="text-xl font-semibold mb-4 text-rose-600 flex items-center gap-3"
+              style="font-family: 'Poppins', sans-serif;">
+              💻 Backend Development
+            </h3>
+            <ul class="space-y-3 text-gray-700 dark:text-gray-900  leading-relaxed"
+              style="font-family: 'Inter', sans-serif;">
+              <li>Python (Core & Advanced)</li>
+              <li>Django & MVC Structure</li>
+              <li>RESTful APIs & CRUD</li>
+              <li>SQLite Integration</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="glass p-9">
-          <h3 class="text-xl font-semibold text-fuchsia-600 mb-4">
-            🏗 Backend Development
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 dark:text-gray-900">
-            I build backend systems that handle data, logic,
-            and workflows using Django and database-driven design.
-          </p>
+        <div class="group relative p-9 rounded-3xl bg-white/85  backdrop-blur-xl 
+          border-2 border-pink-400 shadow-lg transition-all duration-500 
+          hover:-translate-y-5 hover:shadow-[0_35px_80px_rgba(217,70,239,.35)]">
+
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-br from-fuchsia-400/10 to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          </div>
+
+          <div class="relative">
+            <h3 class="text-xl font-semibold mb-4 text-fuchsia-600 flex items-center gap-3"
+              style="font-family: 'Poppins', sans-serif;">
+              🎨 Frontend & UI Design
+            </h3>
+            <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
+              style="font-family: 'Inter', sans-serif;">
+              <li>Semantic HTML5</li>
+              <li>Tailwind CSS</li>
+              <li>JavaScript & DOM</li>
+              <li>Responsive Design</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="glass p-9">
-          <h3 class="text-xl font-semibold text-rose-600 mb-4">
-            🎨 Clean UI Integration
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 dark:text-gray-900">
-            I connect backend functionality with clean,
-            responsive interfaces using Tailwind CSS and JavaScript.
-          </p>
+        <div class="group relative p-9 rounded-3xl bg-white/85 backdrop-blur-xl 
+          border-2 border-pink-400 shadow-lg transition-all duration-500 
+          hover:-translate-y-5 hover:shadow-[0_35px_80px_rgba(244,63,94,.35)]">
+
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-br from-pink-400/10 to-rose-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          </div>
+
+          <div class="relative">
+            <h3 class="text-xl font-semibold mb-4 text-pink-600 flex items-center gap-3"
+              style="font-family: 'Poppins', sans-serif;">
+              ⚙️ Tools & Workflow
+            </h3>
+            <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
+              style="font-family: 'Inter', sans-serif;">
+              <li>Git & GitHub</li>
+              <li>VS Code</li>
+              <li>Deployment (GitHub Pages)</li>
+              <li>Project Architecture</li>
+            </ul>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-
-  <!-- 🌸 TECHNICAL STACK (BALANCED & LIVING) -->
-  <section id="tech" class="py-28 px-6 bg-[#fff1f5] dark:bg-[#1e1b2e] transition-colors">
-
-    <!-- Floating gradient layers -->
-    <div class="absolute -top-40 -left-40 w-[30rem] h-[30rem]
-           bg-gradient-to-br from-pink-400/25 to-rose-400/25
-           rounded-full blur-3xl animate<!-- 🌸 WHAT I DO -->
-<section id=" what-i-do" class="py-28 px-6 bg-[#fff6f8] dark:bg-[#1e1b2e] transition-colors">
-
-      <div class="max-w-6xl mx-auto text-center">
-
-        <!-- Heading -->
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-6
-        bg-gradient-to-r from-pink-500 to-fuchsia-500
-        bg-clip-text text-transparent" style="font-family:'Poppins',system-ui;">
-          What I Do
-        </h2>
-
-        <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-20 text-lg">
-          I focus on turning ideas into practical applications
-          with clean logic, smooth user experience, and scalable structure.
-        </p>
-
-        <div class="grid md:grid-cols-3 gap-12">
-
-          <!-- Card 1 -->
-          <div class="glass p-9">
-            <h3 class="text-xl font-semibold text-pink-600 mb-4">
-              🧠 Problem Solving
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              I break down real-world problems into logical steps
-              and design efficient solutions using Python and structured thinking.
-            </p>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="glass p-9">
-            <h3 class="text-xl font-semibold text-fuchsia-600 mb-4">
-              🏗 Backend Development
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              I build backend systems that handle data, logic,
-              and workflows using Django and database-driven design.
-            </p>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="glass p-9">
-            <h3 class="text-xl font-semibold text-rose-600 mb-4">
-              🎨 Clean UI Integration
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              I connect backend functionality with clean,
-              responsive interfaces using Tailwind CSS and JavaScript.
-            </p>
-          </div>
-
-        </div>
-      </div>
-  </section>
-
-
-  <div class="absolute top-48 -right-40 w-[30rem] h-[30rem]
-           bg-gradient-to-br from-fuchsia-400/25 to-purple-400/25
-           rounded-full blur-3xl animate-pulse"></div>
-
-  <div class="relative max-w-7xl mx-auto">
-
-    <!-- Heading -->
-    <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight text-center mb-6
-             bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600
-             bg-clip-text text-transparent" style="font-family: 'Poppins', system-ui, sans-serif;">
-      Technical Stack
-    </h2>
-
-    <p class="text-center text-gray-700 dark:text-gray-400 d
-             mb-20 max-w-2xl mx-auto text-lg" style="font-family: 'Inter', system-ui, sans-serif;">
-      Technologies and tools I actively work with to design,
-      build, and improve practical software solutions.
-    </p>
-
-    <div class="grid md:grid-cols-3 gap-12">
-
-      <!-- BACKEND -->
-      <div class="group relative p-9 rounded-3xl
-               bg-white/85  backdrop-blur-xl
-               shadow-lg transition-all duration-500
-               hover:-translate-y-5
-               hover:shadow-[0_35px_80px_rgba(236,72,153,.35)]">
-        <div class="absolute inset-0 rounded-3xl
-                 bg-gradient-to-br from-rose-400/20 to-pink-400/20
-                 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
-
-        <div class="relative">
-          <h3 class="text-xl font-semibold mb-4 text-rose-600 flex items-center gap-3"
-            style="font-family: 'Poppins', system-ui, sans-serif;">
-            💻 Backend Development
-          </h3>
-
-          <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
-            style="font-family: 'Inter', system-ui, sans-serif;">
-            <li>Python (core logic & advanced concepts)</li>
-            <li>Django fundamentals and MVC structure</li>
-            <li>RESTful APIs and CRUD operations</li>
-            <li>SQLite database integration</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- FRONTEND -->
-      <div class="group relative p-9 rounded-3xl
-               bg-white/85  backdrop-blur-xl
-               shadow-lg transition-all duration-500
-               hover:-translate-y-5
-               hover:shadow-[0_35px_80px_rgba(217,70,239,.35)]">
-        <div class="absolute inset-0 rounded-3xl
-                 bg-gradient-to-br from-fuchsia-400/20 to-purple-400/20
-                 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
-
-        <div class="relative">
-          <h3 class="text-xl font-semibold mb-4 text-fuchsia-600 flex items-center gap-3"
-            style="font-family: 'Poppins', system-ui, sans-serif;">
-            🎨 Frontend & UI Design
-          </h3>
-
-          <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
-            style="font-family: 'Inter', system-ui, sans-serif;">
-            <li>Semantic HTML5 structure</li>
-            <li>Tailwind CSS for responsive layouts</li>
-            <li>JavaScript (DOM manipulation & animations)</li>
-            <li>Modern UI patterns and accessibility basics</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- TOOLS -->
-      <div class="group relative p-9 rounded-3xl
-               bg-white/85  backdrop-blur-xl
-               shadow-lg transition-all duration-500
-               hover:-translate-y-5
-               hover:shadow-[0_35px_80px_rgba(244,63,94,.35)]">
-        <div class="absolute inset-0 rounded-3xl
-                 bg-gradient-to-br from-pink-400/20 to-rose-400/20
-                 opacity-0 group-hover:opacity-100 blur-xl transition"></div>
-
-        <div class="relative">
-          <h3 class="text-xl font-semibold mb-4 text-pink-600 flex items-center gap-3"
-            style="font-family: 'Poppins', system-ui, sans-serif;">
-            ⚙️ Tools & Workflow
-          </h3>
-
-          <ul class="space-y-3 text-gray-700 dark:text-gray-900 leading-relaxed"
-            style="font-family: 'Inter', system-ui, sans-serif;">
-            <li>Git version control and GitHub collaboration</li>
-            <li>Deployment using GitHub Pages</li>
-            <li>VS Code for development and debugging</li>
-            <li>Clean project structuring practices</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  </section>
-
-
-  <!-- 📂 PROJECTS -->
   <section id="projects" class="max-w-6xl mx-auto px-6 py-24">
-
-    <h2 class="section-title text-5xl md:text-6xl font-extrabold tracking-tight text-center mb-16 reveal
-  bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600
-  bg-clip-text text-transparent">
-      Projects
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-10">
-
+    <h2
+      class="section-title text-5xl md:text-6xl font-extrabold tracking-tight text-center mb-16 reveal bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent">
+      Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
       <div class="glass p-8 border-2 border-pink-400 reveal">
         <h4 class="font-bold text-xl mb-3 dark:text-rose-600">🏏 Fantasy Cricket Application</h4>
-        <p class="text-gray-600 dark:text-gray-900 mb-4">
-          Python-based fantasy cricket system with scoring logic,
-          player selection, and database handling.
-        </p>
-        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank" class="text-pink-500 hover:underline">
-          View on GitHub →
-        </a>
+        <p class="text-gray-600 mb-4">Python-based fantasy cricket system with scoring logic, player selection, and
+          database handling.</p>
+        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank"
+          class="text-pink-500 hover:underline">View on GitHub →</a>
       </div>
-
-      <div class="glass p-8 reveal">
+      <div class="glass p-8 reveal border-2 border-pink-400">
         <h4 class="font-bold text-xl mb-3 dark:text-fuchsia-600">🛒 Grocery Management System</h4>
-        <p class="text-gray-600 dark:text-gray-900 mb-4">
-          CLI-based Python + SQLite CRUD application for managing grocery items.
-        </p>
-        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank" class="text-pink-500 hover:underline">
-          View on GitHub →
-        </a>
+        <p class="text-gray-600 mb-4">CLI-based Python + SQLite CRUD application for managing grocery items.</p>
+        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank"
+          class="text-pink-500 hover:underline">View on GitHub →</a>
       </div>
-
-      <div class="glass p-8 reveal">
+      <div class="glass p-8 reveal border-2 border-pink-400">
         <h4 class="font-bold text-xl mb-3 dark:text-pink-600">🎮 Python Mini Projects</h4>
-        <p class="text-gray-600 dark:text-gray-900 mb-4">
-          Collection of Python mini projects including games and logic-based scripts.
-        </p>
-        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank" class="text-pink-500 hover:underline">
-          View on GitHub →
-        </a>
+        <p class="text-gray-600 mb-4">Collection of Python mini projects including games and logic-based scripts.</p>
+        <a href="https://github.com/palakgoyal95/pythonprojects" target="_blank"
+          class="text-pink-500 hover:underline">View on GitHub →</a>
       </div>
-
     </div>
   </section>
 
   <!-- 🤍 CONTACT -->
+
   <section id="contact" class="py-32 px-6 bg-[#fff6f8] dark:bg-slate-900">
-
     <div class="max-w-4xl mx-auto text-center">
-
-      <h2 class="section-title text-5xl md:text-6xl font-extrabold tracking-tight mb-6
-    bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600
-    bg-clip-text text-transparent">
+      <h2
+        class="section-title text-5xl md:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent">
         Contact Me
       </h2>
 
+
+
       <p class="text-gray-600 dark:text-gray-400 mb-14 max-w-xl mx-auto">
+
         Let’s connect! Feel free to message me for projects,
+
         internships, collaborations, or just a friendly hello.
+
       </p>
 
+
+
       <!-- FORM CARD -->
+
       <form action="mailto:palakgoyal296@gmail.com" method="post" enctype="text/plain" class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl
+
          rounded-3xl p-10
+
          shadow-[0_25px_70px_rgba(0,0,0,0.12)]
+
          space-y-6 transition">
 
+
+
         <!-- Name -->
+
         <div class="relative">
+
           <input type="text" required placeholder=" " class="peer w-full p-4 rounded-xl border border-gray-300
+
              bg-transparent
+
              focus:border-pink-500
+
              focus:ring-4 focus:ring-pink-300/30
+
              outline-none transition" />
+
           <label class="absolute left-4 top-4 text-gray-500
+
              peer-focus:-top-3 peer-focus:text-sm peer-focus:text-pink-500
+
              peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
+
              transition-all
+
              bg-white dark:bg-slate-800 px-2 rounded">
+
             Your Name
+
           </label>
+
         </div>
+
+
 
         <!-- Email -->
+
         <div class="relative">
+
           <input type="email" required placeholder=" " class="peer w-full p-4 rounded-xl border border-gray-300
+
              bg-transparent
+
              focus:border-pink-500
+
              focus:ring-4 focus:ring-pink-300/30
+
              outline-none transition" />
+
           <label class="absolute left-4 top-4 text-gray-500
+
              peer-focus:-top-3 peer-focus:text-sm peer-focus:text-pink-500
+
              peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
+
              transition-all
+
              bg-white dark:bg-slate-800 px-2 rounded">
+
             Your Email
+
           </label>
+
         </div>
+
+
 
         <!-- Message -->
+
         <div class="relative">
+
           <textarea rows="4" required placeholder=" " class="peer w-full p-4 rounded-xl border border-gray-300
+
              bg-transparent resize-none
+
              focus:border-pink-500
+
              focus:ring-4 focus:ring-pink-300/30
+
              outline-none transition"></textarea>
+
           <label class="absolute left-4 top-4 text-gray-500
+
              peer-focus:-top-3 peer-focus:text-sm peer-focus:text-pink-500
+
              peer-placeholder-shown:top-4 peer-placeholder-shown:text-base
+
              transition-all
+
              bg-white dark:bg-slate-800 px-2 rounded">
+
             Your Message
+
           </label>
+
         </div>
+
+
 
         <!-- Submit Button -->
+
         <button class="w-full py-4 rounded-xl font-semibold text-white
+
            bg-pink-500 hover:bg-pink-600
+
            transition transform hover:-translate-y-1
+
            shadow-lg hover:shadow-[0_15px_40px_rgba(236,72,153,.45)]">
+
           Send Message
+
         </button>
 
+
+
       </form>
-
-      <!-- CONNECT WITH ME -->
-      <section class="py-24 bg-[#fff7f9] dark:bg-slate-900">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-          <h2
-            class="text-4xl font-extrabold mb-3 text-pink-600 bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent">
-            Connect With Me </h2>
-          <p class="text-gray-600 mb-16 dark:text-gray-400"> You can find me on these platforms </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <!-- Email -->
-            <a href="mailto:palakgoyal296@gmail.com"
-              class="group bg-[#fdecef] rounded-3xl p-10 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" class="w-14 mx-auto mb-6"
-                alt="Email Logo">
-              <h3 class="text-xl font-semibold mb-1 text-gray-900">Email</h3>
-              <p class="text-gray-600">palakgoyal296@gmail.com</p>
-            </a>
-            <!-- GitHub -->
-            <a href="https://github.com/palakgoyal95" target="_blank"
-              class="group bg-[#f3f0ff] rounded-3xl p-10 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"
-                class="w-14 mx-auto mb-6" alt="GitHub Logo">
-              <h3 class="text-xl font-semibold mb-1 text-gray-900">GitHub</h3>
-              <p class="text-gray-600">github.com/palakgoyal95</p>
-            </a>
-            <!-- LinkedIn -->
-            <a href="https://linkedin.com/in/palak-goyal-b86909235" target="_blank"
-              class="group bg-[#eef6ff] rounded-3xl p-10 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
-                class="w-14 mx-auto mb-6" alt="LinkedIn Logo">
-              <h3 class="text-xl font-semibold mb-1 text-gray-900">LinkedIn</h3>
-              <p class="text-gray-600"> linkedin.com/in/palak-goyal</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
     </div>
   </section>
 
-  <!-- 🌸 FOOTER -->
-  <footer class="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600">
-    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-white text-sm">
-        © 2026 <span class="font-semibold">Palak Goyal</span>. Building modern web applications with passion.
-      </p>
 
-      <div class="flex gap-4">
+  <section class="py-24 bg-[#fff7f9] dark:bg-slate-900">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2
+        class="text-4xl font-extrabold mb-3 text-pink-600 bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 bg-clip-text text-transparent">
+        Connect With Me</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
+        <a href="mailto:palakgoyal296@gmail.com"
+          class="group bg-[#fdecef] rounded-3xl p-10 shadow-lg hover:-translate-y-2 transition-all">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" class="w-14 mx-auto mb-6"
+            alt="Email">
+          <h3 class="text-xl font-semibold mb-1 text-gray-900">Email</h3>
+          <p class="text-gray-600">palakgoyal296@gmail.com</p>
+        </a>
         <a href="https://github.com/palakgoyal95" target="_blank"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white transition">
-          <i class="fab fa-github text-white"></i>
+          class="group bg-[#f3f0ff] rounded-3xl p-10 shadow-lg hover:-translate-y-2 transition-all">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" class="w-14 mx-auto mb-6"
+            alt="GitHub">
+          <h3 class="text-xl font-semibold mb-1 text-gray-900">GitHub</h3>
+          <p class="text-gray-600">github.com/palakgoyal95</p>
         </a>
         <a href="https://linkedin.com/in/palak-goyal-b86909235" target="_blank"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white transition">
-          <i class="fab fa-linkedin text-white"></i>
+          class="group bg-[#eef6ff] rounded-3xl p-10 shadow-lg hover:-translate-y-2 transition-all">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" class="w-14 mx-auto mb-6"
+            alt="LinkedIn">
+          <h3 class="text-xl font-semibold mb-1 text-gray-900">LinkedIn</h3>
+          <p class="text-gray-600">linkedin.com/in/palak-goyal</p>
         </a>
-        <a href="mailto:palakgoyal296@gmail.com"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white transition">
-          <i class="fas fa-envelope text-white"></i>
-        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="w-full bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 py-6">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-white">
+      <p>© 2026 Palak Goyal. Building modern web applications.</p>
+      <div class="flex gap-4">
+        <a href="https://github.com/palakgoyal95" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/palak-goyal-b86909235" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
   </footer>
 
-  <!-- JS FILE -->
   <script src="script.js"></script>
-
 </body>
 
 </html>

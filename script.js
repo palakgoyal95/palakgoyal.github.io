@@ -46,3 +46,10 @@ const glow = document.getElementById("cursor-glow");
 document.addEventListener("mousemove", e => {
   glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
 });
+/* MOBILE MENU TOGGLE */
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
+});
